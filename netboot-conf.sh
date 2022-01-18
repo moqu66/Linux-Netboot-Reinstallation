@@ -55,17 +55,17 @@ EOF
 
 sed -i '/^GRUB_TIMEOUT/d' /etc/default/grub
 
-echo "GRUB_TIMEOUT=60" >> /etc/default/grub
-
 if [[ "${release}" == "centos" ]]; then
   grub2-mkconfig -o /etc/grub2.cfg
+  grub2-reboot "debian-netboot-install"
 elif [[ "${release}" == "debian" || "${release}" == "ubuntu" ]]; then
   update-grub
+  grub-reboot "debian-netboot-install"
 fi
 
 echo ''
 echo ''
 echo ''
-echo "配置完成，连接VNC后重启机器即可在启动菜单选择 debian-netboot-install"
+echo "配置完成，重启机器后连接VNC即可"
 echo ''
 echo ''
